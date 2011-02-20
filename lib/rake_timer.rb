@@ -18,8 +18,8 @@ class RakeTimer
     end
 
     def record(task_name, time)
-      unit = config[:unit]
-      if unit and (unit == :seconds)
+      unit = config[:unit] || :milliseconds
+      if unit == :seconds
         output_time = time
         puts "#{task_name} took #{sprintf("%.3f", output_time)} seconds"
       else
@@ -28,7 +28,7 @@ class RakeTimer
       end
       output_options = config[:to] || {}
       as_csv(task_name, output_time) if output_options.include? :csv
-      as_statsd(task_name, output_time) if output_options.include? :statsd
+      as_statsd(task_name, time) if output_options.include? :statsd
     end
 
     def as_csv(task_name, time)

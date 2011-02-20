@@ -1,7 +1,7 @@
 RakeTimer
 ==============
 
-Times how long each Rake tasks takes. If your Rake build starts to get too long, it can be useful to quickly see how long each is taking. It can also be useful to track Tasks over time.
+Times how long each Rake task takes. If your Rake build starts to get too long, it can be useful to quickly see how long each task is taking. It can also be useful to track Tasks over time.
 
 Usage
 ------------
@@ -12,7 +12,7 @@ In your Rakefile, add:
 
 Output
 ------------
-By default, time stats are written to the console. Optionally, you can write (append) to a CSV file (in reports/rake-timer.csv), which can easily be read by a charting library such as [Highcharts](http://highcharts.com/)
+By default, time stats are written to the console. Optionally, you can write (append) to a CSV file (in reports/rake-timer.csv), which can easily be read by a charting library such as [Highcharts](http://highcharts.com/).
 
 Even more optionally, you can output results to the very nice [statsd](https://github.com/etsy/statsd). Each task gets its own time-based set of graphs, so you can see how your build time is affected over, well time.
 
