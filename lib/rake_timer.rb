@@ -1,5 +1,4 @@
 require 'socket'
-require File.expand_path(File.dirname(__FILE__) + '/rake/task')
 
 # time_tasks :to => [:csv, :statsd], :unit => :milliseconds, :host => 'localhost', :port => 8125
 def time_tasks(options = {})
