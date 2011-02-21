@@ -2,7 +2,7 @@ require 'socket'
 
 # time_tasks :to => [:csv, :statsd], :unit => :milliseconds, :host => 'localhost', :port => 8125
 def time_tasks(options = {})
-  Thread.current[:time_options] = options
+  Thread.current[:time_options] = options.merge(:enabled => true)
 end
 
 class RakeTimer
@@ -10,6 +10,7 @@ class RakeTimer
   class << self
 
     def time(task_name)
+      yield and return unless config[:enabled] || task_name == "metrics:all"
       start = Time.now
       result = yield
       record(task_name, Time.now - start)
@@ -20,10 +21,10 @@ class RakeTimer
       unit = config[:unit] || :milliseconds
       if unit == :seconds
         output_time = time
-        puts "#{task_name} took #{sprintf("%.3f", output_time)} seconds"
+        $stderr.puts "#{task_name} took #{sprintf("%.3f", output_time)} seconds"
       else
         output_time = time * 1000
-        puts "#{task_name} took #{output_time} milliseconds"
+        $stderr.puts "#{task_name} took #{output_time} milliseconds"
       end
       output_options = config[:to] || {}
       as_csv(task_name, output_time) if output_options.include? :csv
