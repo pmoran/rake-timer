@@ -33,7 +33,7 @@ class RakeTimer
 
     def as_csv(task_name, time)
       File.open("reports/rake-timer.csv", 'a') do |f|
-        f.write("#{task_name}, #{time * 1000}\n")
+        f.write("#{task_name}, #{time}\n")
       end
     end
 
