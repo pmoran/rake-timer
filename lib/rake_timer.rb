@@ -10,7 +10,7 @@ class RakeTimer
   class << self
 
     def time(task_name)
-      yield and return unless config[:enabled] || task_name == "metrics:all"
+      yield and return unless config[:enabled]
       start = Time.now
       result = yield
       record(task_name, Time.now - start)
